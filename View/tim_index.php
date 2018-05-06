@@ -44,7 +44,7 @@
                                                 <td>SMI</td>
                                                 <td>1</td>
                                                 <td>
-                                                    <a href="?page=">
+                                                    <a href="?page=tim_detail">
                                                         <button class="btn btn-primary"><i class="fa fa-search"></i></button>
                                                     </a>
                                                     <a href="?page=">
@@ -54,7 +54,6 @@
                                                         <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                                     </a></td>
                                                 </tr>
-                                                <?php } ?>
                                             </tbody>
                                         </table>
                                     </div>

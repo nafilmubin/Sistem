@@ -1,7 +1,3 @@
- <?php
- require 'src/Domain/dokumen_model.php';
- $db = new Dokumen();
- ?>
  <div class="header col-md-12" style="margin-top: 15px;">
     <div class="col-md-7">
         <form role="form" method="POST" action="?page=dokumen_index">
@@ -27,8 +23,8 @@
 
                     <div class="col-md-12" style="margin-top: 5px;">
 
-                       <!--    Context Classes  -->
-                       <div class="panel panel-default">
+                     <!--    Context Classes  -->
+                     <div class="panel panel-default">
                         <div class="panel-heading">
                             Dokumen Proyek
                         </div>
@@ -44,11 +40,14 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                       <?php
-                                       foreach($db->tampil_data() as $x){
-                                        ?>
                                         <tr>
-                                         
+                                          <?php
+
+                                    // Fetch all users data from database
+                                    //inner join
+                                          $result = mysqli_query($koneksi, "SELECT dokumen.*, proyek.nama_proyek FROM dokumen join proyek on proyek.id_proyek = dokumen.id_proyek ");
+                                          while($x = mysqli_fetch_array($result)) {   
+                                            ?>
                                             <td><?php echo $x['nama_proyek'] ?></td>
                                             <td><?php echo $x['judul'] ?></td>
                                             <td><?php echo $x['attachment'] ?></td>
@@ -57,7 +56,7 @@
                                                     <button class="btn btn-warning"><i class="fa fa-pencil"></i></button>
                                                 </a>
                                             </button>
-                                            <a href="src/Infrastruktur/dokumen.php?aksi=hapus&id=<?php echo $x['id_dokumen'];?>">
+                                            <a href="?page=dokumen_delete&id=hapus&id=<?php echo $x['id_dokumen'];?>">
                                                 <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                             </a>
                                         </td>
