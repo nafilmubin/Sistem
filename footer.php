@@ -1,5 +1,5 @@
 <div id="footer-sec">
-        &copy; 2018 Sistem Sisteman. All Right Reserved.</a>
+        &copy; 2018 PT DOT Indonesia All Right Reserved.</a>
     </div>
     <!-- /. FOOTER  -->
     <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->

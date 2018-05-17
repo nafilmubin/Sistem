@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sistem Sisteman</title>
+  <title>Sistem Kepegawaian PT DOT Indonesia</title>
 
   <!-- BOOTSTRAP STYLES-->
   <link href="assets/css/bootstrap.css" rel="stylesheet" />
@@ -46,7 +46,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="?page=index.php"><h6><b>Sistem Sisteman</b></h6></a>
+        <a class="navbar-brand" href="?page=index.php"><h6><b>DISTINCTION ON TECHNOLOGY</b></h6></a>
       </div>
 
       <div class="header-right2">
@@ -97,9 +97,6 @@
               <a href="?page=dashboard">Hello Admin<span></span></a>
             </li>            
             <li>
-              <a href="?page=pembeli_index">Penanggung Jawab <span></span></a>
-            </li>
-            <li>
               <a href="?page=barang_indexAdmin">Data Barang <span></span></a>
             </li>            
           </ul>
@@ -109,6 +106,12 @@
           <ul class="nav">
             <li>
               <a href="?page=dashboard_PM">Hello Project Manager</a>
+            </li>
+            <li>
+              <a href="?page=rab_index">Rancangan Anggaran Biaya <span></span></a>
+            </li>
+            <li>
+              <a href="?page=pengajuan_indexPM">Pengajuan<span></span></a> 
             </li>
             <li>
               <a href="?page=pembeli_indexPM">Penanggung Jawab <span></span></a>
@@ -140,6 +143,9 @@
               <a class="" href="?page=dashboard_user">Hello Karyawan</a>
             </li>
             <li>
+              <a href="?page=pengajuan_indexuser">Pengajuan <span></span></a> 
+            </li>
+            <li>
               <a href="?page=pembeli_indexuser">Penanggung Jawab <span></span></a>
             </li>
             <li>
@@ -158,6 +164,12 @@
           <ul class="nav">
             <li>
               <a class="" href="?page=dashboard_Manajemen">Hello CEO</a>
+              <li>
+                <a href="?page=rab_indexManajemen">Rancangan Anggaran Biaya <span></span></a>
+              </li>
+              <li>
+                <a href="?page=pengajuan_indexmanajemen">Pengajuan<span></span></a>
+              </li>
               <li>
                 <a href="?page=pembeli_indexManajemen">Penanggung Jawab <span></span></a>
               </li>

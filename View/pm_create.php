@@ -32,25 +32,23 @@
 </div>
 </div>
 </section>
-
-
 <?php
- if(isset($_POST['submit'])) {
-        $id_proyek = $_POST['id_proyek'];
-        $nama_proyek = $_POST['nama_proyek'];
-        $id_karyawan = $_POST['id_karyawan'];
+if(isset($_POST['submit'])) {
+  $id_proyek = $_POST['id_proyek'];
+  $nama_proyek = $_POST['nama_proyek'];
+  $id_karyawan = $_POST['id_karyawan'];
 
          // Insert user data into table
-         $result = mysqli_query($koneksi, "INSERT INTO proyek (id_proyek,nama_proyek,id_karyawan) VALUES('$id_proyek','$nama_proyek','$id_karyawan')"); 
-       
-        
-    
+  $result = mysqli_query($koneksi, "INSERT INTO proyek (id_proyek,nama_proyek,id_karyawan) VALUES('$id_proyek','$nama_proyek','$id_karyawan')"); 
+
+
+
         // Show message when user added
-        ?>
-        <script type="text/javascript">
-             alert("Proyek  Berhasil Ditambahkan ");
-                location="?page=pm_index";
-        </script>
-          <?php
-    }
-    ?>
+  ?>
+  <script type="text/javascript">
+   alert("Proyek  Berhasil Ditambahkan ");
+   location="?page=pm_index";
+ </script>
+ <?php
+}
+?>

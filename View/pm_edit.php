@@ -19,9 +19,9 @@ if(isset($_POST['submit']))
     alert("Data Proyek Berhasil Diperbarui ");
     location="?page=pm_index";
   </script>
- <?php
-    }
-    ?>
+  <?php
+}
+?>
 <?php 
 $id_proyek = $_GET['id'];
 // Fetech user data based on id
@@ -55,12 +55,12 @@ $data = mysqli_fetch_array($result);
           <option value="<?php echo $data['id_karyawan']; ?>"><?php echo $data['nama_karyawan']; ?></option>
           <?php } ?>
         </select>
-    </div>  
-    <br>
-    <button type="submit" name="submit" class="btn btn-info">Save </button>
-    <a onclick="window.history.back();return false;" class="btn btn-warning"><i class="fa fa-reply"></i> Back</a>
-  </form>
-</div>
+      </div>  
+      <br>
+      <button type="submit" name="submit" class="btn btn-info">Save </button>
+      <a onclick="window.history.back();return false;" class="btn btn-warning"><i class="fa fa-reply"></i> Back</a>
+    </form>
+  </div>
 </div>
 </div>
 </section>
@@ -86,6 +86,6 @@ if(isset($_POST['submit']))
     alert("Data Proyek Berhasil Diperbarui ");
     location="?page=pm_index";
   </script>
- <?php
-    }
-    ?>
+  <?php
+}
+?>

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 04 Mei 2018 pada 15.12
+-- Generation Time: 17 Mei 2018 pada 11.49
 -- Versi Server: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -635,7 +635,11 @@ INSERT INTO `audit_trails` (`waktu`, `content`, `id_karyawan`) VALUES
 ('2018-03-13 20:06:21', 'Logout', 'DOT13'),
 ('2018-03-13 20:53:32', 'Logout', 'DOT11'),
 ('2018-03-13 20:53:41', 'Login', 'DOT02'),
-('2018-03-29 09:43:24', 'Login', 'DOT09');
+('2018-03-29 09:43:24', 'Login', 'DOT09'),
+('2018-05-17 16:31:29', 'User Menambahkan RAB', ''),
+('2018-05-17 16:33:44', 'User Menambahkan RAB', ''),
+('2018-05-17 16:34:52', 'User Menambahkan RAB', ''),
+('2018-05-17 16:35:13', 'User Menambahkan RAB', '');
 
 -- --------------------------------------------------------
 
@@ -713,7 +717,8 @@ CREATE TABLE `dokumen` (
 
 INSERT INTO `dokumen` (`id_dokumen`, `id_proyek`, `judul`, `attachment`) VALUES
 ('DOK01', '4', 'Technical Specification Document', 'TSD.docx'),
-('DOK02', '3', 'Functional Specification Document', 'a.php');
+('DOK02', '1', 'Functional Specification Document', 'fsd emasdigi.php'),
+('DOK03', '4', 'Use Case', 'use case.docx');
 
 -- --------------------------------------------------------
 
@@ -785,6 +790,18 @@ INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
 ('JAB04', 'Android Developer'),
 ('JAB05', 'IOS Developer'),
 ('JAB06', 'Project Manager');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `jenis_pengajuan`
+--
+
+CREATE TABLE `jenis_pengajuan` (
+  `id_jenispengajuan` varchar(20) NOT NULL,
+  `nama_jenispengajuan` varchar(25) NOT NULL,
+  `keterangan` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -868,6 +885,53 @@ INSERT INTO `modul` (`id_modul`, `nama_modul`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `pembeli`
+--
+
+CREATE TABLE `pembeli` (
+  `id_pembeli` varchar(20) NOT NULL,
+  `id_pengajuan` varchar(20) NOT NULL,
+  `id_karyawan` varchar(20) NOT NULL,
+  `tgl_beli` date NOT NULL,
+  `anggaran` int(20) NOT NULL,
+  `attachment` varchar(250) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pembeli`
+--
+
+INSERT INTO `pembeli` (`id_pembeli`, `id_pengajuan`, `id_karyawan`, `tgl_beli`, `anggaran`, `attachment`) VALUES
+('11', 'PGN01', 'DOT14', '2018-05-02', 200000, '');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `pengajuan`
+--
+
+CREATE TABLE `pengajuan` (
+  `id_pengajuan` varchar(20) NOT NULL,
+  `id_karyawan` varchar(20) NOT NULL,
+  `id_rab` varchar(20) NOT NULL,
+  `nama_pengajuan` varchar(25) NOT NULL,
+  `biaya` int(20) NOT NULL,
+  `alasan` varchar(50) NOT NULL,
+  `tgl_pengajuan` date NOT NULL,
+  `status_pengajuan` varchar(25) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `pengajuan`
+--
+
+INSERT INTO `pengajuan` (`id_pengajuan`, `id_karyawan`, `id_rab`, `nama_pengajuan`, `biaya`, `alasan`, `tgl_pengajuan`, `status_pengajuan`) VALUES
+('PGN01', 'DOT14', 'RAB3', 'Bensin', 10000, 'urgent bos', '2018-04-25', 'Dicairkan'),
+('PGN02', 'DOT14', 'RAB2', 'Pengajuanku', 6000, 'Penting', '0000-00-00', 'Menunggu');
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `progress`
 --
 
@@ -894,9 +958,10 @@ CREATE TABLE `proyek` (
 --
 
 INSERT INTO `proyek` (`id_proyek`, `nama_proyek`, `id_karyawan`) VALUES
-('2', 'Parenthink', 'DOT14'),
+('1', 'EmasDigi', 'DOT14'),
 ('3', 'Raja Pindah', 'DOT14'),
-('4', 'SMI', 'DOT14');
+('4', 'SMI', 'DOT14'),
+('5', 'Semen Gresik', 'DOT14');
 
 -- --------------------------------------------------------
 
@@ -907,9 +972,10 @@ INSERT INTO `proyek` (`id_proyek`, `nama_proyek`, `id_karyawan`) VALUES
 CREATE TABLE `rab` (
   `id_rab` int(20) NOT NULL,
   `id_proyek` varchar(5) NOT NULL,
-  `nama_rab` varchar(25) NOT NULL,
   `id_karyawan` varchar(20) NOT NULL,
   `attachment` varchar(250) NOT NULL,
+  `jumlah_pengajuan` int(20) NOT NULL,
+  `jumlah_disetujui` int(20) NOT NULL,
   `periode` date NOT NULL,
   `keterangan` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -918,9 +984,32 @@ CREATE TABLE `rab` (
 -- Dumping data untuk tabel `rab`
 --
 
-INSERT INTO `rab` (`id_rab`, `id_proyek`, `nama_rab`, `id_karyawan`, `attachment`, `periode`, `keterangan`) VALUES
-(1, 'PRO01', 'Iphone 6s', '', '', '0000-00-00', ''),
-(2, 'PRO01', 'Pil sehat', '', '', '0000-00-00', '');
+INSERT INTO `rab` (`id_rab`, `id_proyek`, `id_karyawan`, `attachment`, `jumlah_pengajuan`, `jumlah_disetujui`, `periode`, `keterangan`) VALUES
+(1, '4', 'DOT10', '', 0, 0, '2018-05-17', 'Draft'),
+(12, '4', 'DOT14', 'TEST.docx', 0, 0, '2018-05-17', 'Draft');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `rab_detail`
+--
+
+CREATE TABLE `rab_detail` (
+  `id_det` int(20) NOT NULL,
+  `id_rab` int(20) NOT NULL,
+  `nama_anggaran` varchar(50) NOT NULL,
+  `nominal` int(20) NOT NULL,
+  `status` varchar(25) NOT NULL,
+  `catatan` text,
+  `keterangan` varchar(25) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `rab_detail`
+--
+
+INSERT INTO `rab_detail` (`id_det`, `id_rab`, `nama_anggaran`, `nominal`, `status`, `catatan`, `keterangan`) VALUES
+(1, 1, 'Aku', 1000000, 'Belum Disetujui', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1041,6 +1130,12 @@ ALTER TABLE `jabatan`
   ADD PRIMARY KEY (`id_jabatan`);
 
 --
+-- Indexes for table `jenis_pengajuan`
+--
+ALTER TABLE `jenis_pengajuan`
+  ADD PRIMARY KEY (`id_jenispengajuan`);
+
+--
 -- Indexes for table `karyawan`
 --
 ALTER TABLE `karyawan`
@@ -1061,6 +1156,21 @@ ALTER TABLE `kategori_barang`
 --
 ALTER TABLE `modul`
   ADD PRIMARY KEY (`id_modul`);
+
+--
+-- Indexes for table `pembeli`
+--
+ALTER TABLE `pembeli`
+  ADD PRIMARY KEY (`id_pembeli`),
+  ADD KEY `id_pengajuan` (`id_pengajuan`,`id_karyawan`);
+
+--
+-- Indexes for table `pengajuan`
+--
+ALTER TABLE `pengajuan`
+  ADD PRIMARY KEY (`id_pengajuan`),
+  ADD KEY `id_karyawan` (`id_karyawan`),
+  ADD KEY `id_rab` (`id_rab`);
 
 --
 -- Indexes for table `progress`
@@ -1084,6 +1194,13 @@ ALTER TABLE `rab`
   ADD PRIMARY KEY (`id_rab`),
   ADD KEY `id_proyek` (`id_proyek`),
   ADD KEY `id_karyawan` (`id_karyawan`);
+
+--
+-- Indexes for table `rab_detail`
+--
+ALTER TABLE `rab_detail`
+  ADD PRIMARY KEY (`id_det`),
+  ADD KEY `id_rab` (`id_rab`);
 
 --
 -- Indexes for table `rencana`
@@ -1124,7 +1241,12 @@ ALTER TABLE `progress`
 -- AUTO_INCREMENT for table `rab`
 --
 ALTER TABLE `rab`
-  MODIFY `id_rab` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_rab` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+--
+-- AUTO_INCREMENT for table `rab_detail`
+--
+ALTER TABLE `rab_detail`
+  MODIFY `id_det` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tim`
 --
@@ -1141,10 +1263,22 @@ ALTER TABLE `dokumen`
   ADD CONSTRAINT `dokumen_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);
 
 --
+-- Ketidakleluasaan untuk tabel `evaluasi`
+--
+ALTER TABLE `evaluasi`
+  ADD CONSTRAINT `evaluasi_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`);
+
+--
 -- Ketidakleluasaan untuk tabel `fitur`
 --
 ALTER TABLE `fitur`
   ADD CONSTRAINT `fitur_ibfk_1` FOREIGN KEY (`id_modul`) REFERENCES `modul` (`id_modul`);
+
+--
+-- Ketidakleluasaan untuk tabel `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD CONSTRAINT `karyawan_ibfk_1` FOREIGN KEY (`id_role`) REFERENCES `role_user` (`id_role`);
 
 --
 -- Ketidakleluasaan untuk tabel `progress`
@@ -1158,6 +1292,19 @@ ALTER TABLE `progress`
 --
 ALTER TABLE `proyek`
   ADD CONSTRAINT `proyek_ibfk_1` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id_karyawan`);
+
+--
+-- Ketidakleluasaan untuk tabel `rab`
+--
+ALTER TABLE `rab`
+  ADD CONSTRAINT `rab_ibfk_1` FOREIGN KEY (`id_proyek`) REFERENCES `proyek` (`id_proyek`),
+  ADD CONSTRAINT `rab_ibfk_2` FOREIGN KEY (`id_karyawan`) REFERENCES `karyawan` (`id_karyawan`);
+
+--
+-- Ketidakleluasaan untuk tabel `rab_detail`
+--
+ALTER TABLE `rab_detail`
+  ADD CONSTRAINT `rab_detail_ibfk_1` FOREIGN KEY (`id_rab`) REFERENCES `rab` (`id_rab`);
 
 --
 -- Ketidakleluasaan untuk tabel `rencana`
